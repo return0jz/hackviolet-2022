@@ -8,7 +8,7 @@ function SubmitGroup() {
   let [name, setName] = useState('');
   let [email, setEmail] = useState('');
     return (
-      <div id="menubar">
+      <div id="submitgroup">
         <Paper elevation={5}>
           <Menubar />
           <h1> Submit your group to be rated </h1>

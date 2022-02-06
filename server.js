@@ -55,6 +55,7 @@ function routes() {
           }
         }
       })
+      res.end();
     })()
   })
 }

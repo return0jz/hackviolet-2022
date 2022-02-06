@@ -6,6 +6,9 @@ import Menubar from './Menubar';
 import './GroupView.scss'
 
 function GroupView() {
+  const [average, setAverage] = useState(5);
+  const [exists, setExists] = useState(false);
+  const [reviewSection, setReviewSection] = useState([]);
   const navigate = useNavigate();
   const { name } = useParams();
 
@@ -21,19 +24,33 @@ function GroupView() {
       })
     })
     let res = await req.json();
-    console.log(res);
-  })
-
-  return(
-    <div id="groupview">
-      <Paper elevation={5}>
-        <Menubar />
-        <h1 id="groupName">{name}</h1>
-        <ReviewButton name={name}/>
-        <br />
-      </Paper>
-    </div>
-  )
+    let new_arr = [...reviewSection];
+    if (res.length && res[0].comments.length) {
+      setExists(true);
+      res[0].comments.forEach((item, index) => {
+        console.log(reviewSection)
+        new_arr.push([<ReviewBox key={index} review={item}/>]);
+        setAverage(average + item.rating);
+      })
+    }
+    setReviewSection(new_arr);
+    setAverage(average/(res[0].comments.length+1));
+  }, [])
+  if (exists) {
+    return(
+      <div id="groupview">
+        <Paper elevation={5}>
+          <Menubar />
+          <h1 id="groupName">{name}</h1>
+          <p id="average"> The average score is: {average} </p>
+          <ReviewButton name={name}/>
+          <br />
+        </Paper>
+        {reviewSection}
+      </div>
+    )
+  }
+  return <p> Page doesn't exist. </p>
 }
 
 function ReviewButton(props) {
@@ -46,6 +63,18 @@ function ReviewButton(props) {
       </Button>
     </Box>
 
+  )
+}
+
+function ReviewBox(props) {
+  return (
+    <Paper>
+      <div class="boxy">
+        <h3>{props.review.user_id}</h3>
+        <p>{props.review.description}</p>
+        <p>Score: {props.review.rating}</p>
+      </div>
+    </Paper>
   )
 }
 
