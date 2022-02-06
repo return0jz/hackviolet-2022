@@ -25,8 +25,10 @@ function GroupView() {
     })
     let res = await req.json();
     let new_arr = [...reviewSection];
-    if (res.length && res[0].comments.length) {
+    if (res.length) {
       setExists(true);
+    }
+    if (res.length && res[0].comments.length) {
       res[0].comments.forEach((item, index) => {
         console.log(reviewSection)
         new_arr.push([<ReviewBox key={index} review={item}/>]);
