@@ -42,6 +42,21 @@ function routes() {
       res.send(query);
     })()
   });
+  app.post('/api/review', (req, res) => {
+    (async function() {
+      let query = await Group.findOneAndUpdate({
+        name: req.body.group
+      },{
+        $push: {
+          comments: {
+            user_id: req.body.name,
+            description: req.body.description,
+            rating: req.body.rating
+          }
+        }
+      })
+    })()
+  })
 }
 
 function start() {

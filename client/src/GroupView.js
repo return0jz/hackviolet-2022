@@ -1,8 +1,9 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React, {Component, useEffect, useState} from 'react';
 import { useParams, useNavigate} from 'react-router-dom';
-import { Button } from '@mui/material';
+import { Button, Paper, Box } from '@mui/material';
 import Menubar from './Menubar';
+import './GroupView.scss'
 
 function GroupView() {
   const navigate = useNavigate();
@@ -24,21 +25,27 @@ function GroupView() {
   })
 
   return(
-    <div>
-      <Menubar />
-      <h1>{name}</h1>
-      <ReviewButton name={name}/>
+    <div id="groupview">
+      <Paper elevation={5}>
+        <Menubar />
+        <h1 id="groupName">{name}</h1>
+        <ReviewButton name={name}/>
+        <br />
+      </Paper>
     </div>
   )
 }
 
 function ReviewButton(props) {
   return (
-    <Button variant="contained" onClick={() => {
-      window.location.replace(`/review/:${props.name}`)
-    }}>
-      Make a review.
-    </Button>
+    <Box textAlign='center'>
+      <Button variant="contained" onClick={() => {
+        window.location.replace(`/review/${props.name}`)
+      }}>
+        Make a review.
+      </Button>
+    </Box>
+
   )
 }
 

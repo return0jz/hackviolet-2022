@@ -11,6 +11,7 @@ import Profile from './Profile';
 import SubmitGroup from './SubmitGroup';
 import GroupView from './GroupView';
 import './index.scss'
+import SubmitReview from './SubmitReview';
 
 const domain = process.env.REACT_APP_AUTH0_DOMAIN;
 const clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
@@ -23,6 +24,7 @@ ReactDOM.render(
           <Route exact path="/profile" element={<Profile />}/>
           <Route exact path="/submitgroup" element={<SubmitGroup />}/>
           <Route exact path = "/groupview/:name" element={<GroupView />}/>
+          <Route exact path = "/review/:name" element={<SubmitReview />}/>
           <Route path='*' element={<p>Page not found.</p>}> </Route>
         </Routes>
       </BrowserRouter>
