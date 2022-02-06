@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai+Looped:wght@200&family=Roboto:wght@300&family=Supermercado+One&display=swap');
+
+#menubar {
+  hr {
+    width: 10%;
+  }
+  ul {
+    margin: 20px;
+    list-style: none;
+    li {
+      a{
+        text-decoration: none;
+        font-family: 'IBM Plex Sans Thai Looped', sans-serif;
+        color: rgb(53, 0, 48);
+      }
+      a:visited {
+        text-decoration: none;
+      }
+    }
+  }
+}

@@ -1,7 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React, {Component} from 'react';
 import Menubar from './Menubar';
-import { Avatar } from '@mui/material';
+import { Avatar, Paper } from '@mui/material';
+import './Profile.scss'
 
 function Profile() {
   const { user, isLoading, isAuthenticated} = useAuth0();
@@ -20,7 +21,7 @@ function Profile() {
       </div>
     )
   }
-  window.location.replace(window.location.hostname);
+  window.location.replace("/");
   return (<React.Fragment></React.Fragment>);
 }
 

@@ -4,12 +4,8 @@ import Menubar from './Menubar';
 import { Grid, TextField, Button } from '@mui/material';
 
 function SubmitGroup() {
-  let [group, email] = useState('');
-  const {user, isLoading, isAuthenticated} = useAuth0();
-  if(isLoading) {
-    return ("Loading...");
-  }
-  if (isAuthenticated) {
+  let [name, setName] = useState('');
+  let [email, setEmail] = useState('');
     return (
       <div>
         <Menubar />
@@ -32,7 +28,7 @@ function SubmitGroup() {
               label="Your Group Name"
               defaultValue=""
               onChange={(event) => {
-                group = event.target.value;
+                setName(event.target.value);
               }}
             />
           </Grid>
@@ -46,7 +42,7 @@ function SubmitGroup() {
               label="Email for verification."
               defaultValue=""
               onChange={(event) => {
-                email = event.target.value;
+                setEmail(event.target.value);
               }}
             />
           </Grid>
@@ -60,9 +56,11 @@ function SubmitGroup() {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json'
                   },
-                  body: JSON.stringify({group: group, email: email})
-                });
-                window.location.replace(window.location.hostname);
+                  body: JSON.stringify({name: name, email: email})
+                }).then(() => {
+                    console.log("Submitted.")
+                    window.location.replace("/");
+                  });
               })()
             }}>
               Submit
@@ -70,10 +68,7 @@ function SubmitGroup() {
           </Grid>
         </Grid>
       </div>
-    )
-  }
-  window.location.replace(window.location.hostname);
-  return (<React.Fragment></React.Fragment>);
+    );
 }
 
 export default SubmitGroup;
